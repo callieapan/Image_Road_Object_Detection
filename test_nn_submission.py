@@ -16,7 +16,7 @@ matplotlib.rcParams['figure.dpi'] = 200
 import random
 import time
 
-from model_loader_CP2 import *
+#from model_loader_CP2 import *
 #from CP_helper import *
 
 import torch
@@ -24,12 +24,33 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
 import torchvision.transforms as transforms
+import torchvision.models as models
 
 from data_helper import UnlabeledDataset, LabeledDataset
-from data_helper_triangle_down import TriangleLabeledDataset,image_names, get_mask_name, load_mask
+#from data_helper_triangle_down import TriangleLabeledDataset,
+#from shape_splitter import get_mask_name
+#from data_helper_triangle_down import load_mask
 from helper import collate_fn, draw_box
 import argparse
 import datetime
+
+
+def get_mask_name(camera,shape):
+    return camera.replace(".jpeg",f"_{shape[0]}.npy")
+
+
+
+def load_mask(camera,downsample_shape):
+    mask_name = get_mask_name(camera,downsample_shape)
+    if os.path.exists(mask_name):
+        mask = np.load(mask_name)
+    else:
+        save_masks(downsample_shape)
+        mask = np.load(mask_name)
+    mask = mask.reshape(downsample_shape).transpose()
+    return mask
+
+
 
 def timeStamped(fname, fmt='%Y-%m-%d-%H-%M-%S_{fname}'):
     return datetime.datetime.now().strftime(fmt).format(fname=fname)

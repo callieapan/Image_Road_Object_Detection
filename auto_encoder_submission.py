@@ -202,7 +202,7 @@ class ConvAutoencoder(nn.Module):
         
         return x
     
-def get_autoencoder(require_grad = False, checkpoint):
+def get_autoencoder( checkpoint, require_grad = False):
     m_test = ConvAutoencoder()
     #m_test.load_state_dict(torch.load('autoencoder_new.pt2'))
     m_test.load_state_dict(checkpoint['autoencoder_new.pt2'])
