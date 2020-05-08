@@ -57,7 +57,8 @@ class ModelLoader():
         checkpoint = load_object(model_file) #torch.load(model_file)
         self.AE = get_autoencoder(checkpoint).to(self.device) #from auto_encoder.py
         bbox_model = fr50_Model() #from bbox.py
-        bbox_model.load_state_dict(checkpoint['bbox_state_dict'])
+        bbox_model.load_state_dict(checkpoint['bbox_state_dict'])#check which bbox_state_dict
+        ###bbox_model.load_state_dict(torch.load('fastRCNN_sew614epoch.pt')['model_state_dict'])
         bbox_model.eval()
         self.bbox_model = bbox_model.to(self.device)
         
@@ -81,6 +82,7 @@ class ModelLoader():
         self.normalize = transforms.Normalize(mean=[0.6394939, 0.6755114, 0.7049375],
                                      std=[0.31936955, 0.3117349 , 0.2953726 ])
         
+        self.tt = transforms.Compose([transforms.Resize((800, 800)), transforms.ToTensor(), self.normalize])
 
     def get_bounding_boxes(self, samples):
         # samples is a cuda tensor with size [batch_size, 6, 3, 256, 306]
@@ -91,6 +93,9 @@ class ModelLoader():
         samp_pan = [self.normalize(i) for i in samp_pan]
         samp_pan_t = torch.stack(samp_pan, dim = 0)
         images = self.AE.return_image_tensor(samp_pan_t.to(self.device))
+        
+        ###samples = samples.cpu()
+        ###images = [self.tt(sew_images(s)).to(self.device) for s in samples]
         
         pred = self.bbox_model(images)
         box_list = []

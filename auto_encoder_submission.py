@@ -15,10 +15,9 @@ matplotlib.rcParams['figure.dpi'] = 200
 import random
 import time
 
-#sys.path.append('/root/dl2020')
 from data_helper import UnlabeledDataset, LabeledDataset
 from helper import collate_fn, draw_box
-#from Unet import *
+
 
 import torch
 import torch.nn as nn
@@ -142,6 +141,8 @@ class ConvAutoencoder(nn.Module):
     
 def get_autoencoder( checkpoint, require_grad = False):
     m_test = ConvAutoencoder()
-    #m_test.load_state_dict(torch.load('autoencoder_new.pt2'))
-    m_test.load_state_dict(checkpoint['autoencoder_new.pt2'])
+    m_test.load_state_dict(checkpoint['autoencoder_new.pt2']) ## this is not giving results
+    
+    
+    
     return m_test
