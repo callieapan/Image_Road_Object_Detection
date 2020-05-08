@@ -16,8 +16,6 @@ matplotlib.rcParams['figure.dpi'] = 200
 import random
 import time
 
-#from model_loader_CP2 import *
-#from CP_helper import *
 
 import torch
 import torch.nn as nn
