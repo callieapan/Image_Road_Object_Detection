@@ -64,3 +64,6 @@ conda install Shapely
 
 #install skimage
 conda install -c conda-forge scikit-image
+
+#install opencv
+pip install opencv-python
