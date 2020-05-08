@@ -13,22 +13,7 @@ from auto_encoder_submission import *
 from bbox import *
 from test_nn_submission import *
 
-'''
-#### NEED TO DO to save both models ###
-checkpt = torch.load("../models/fastRCNN_autoencode14epoch.pt") #or from my dropbox
-bbox_model = fr50_Model()
-bbox_model.load_state_dict(checkpt["model_state_dict"]
-
-checkpt2 = torch.load("where ben saved his model")  
-road_model = Ben_Model()
-road_model.load_state_dict(ccheckpt2["model_state_dict"]
-
-troch.save({
-        "bbox_state_dict": bbox_model.state_dict(),
-        "road_state_dict": road_model.state_dict(),
-)
-
-'''
+ 
 # Put your transform function here, we will use it for our dataloader
 # For bounding boxes task
 def get_transform_task1(): 
