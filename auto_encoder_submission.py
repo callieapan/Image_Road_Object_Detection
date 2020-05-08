@@ -27,70 +27,8 @@ import torchvision
 import torchvision.transforms as transforms
 import torch.utils.data
 
+ 
 
-
-def gen_train_val_index(labeled_scene_index):
-    breakpt = len(labeled_scene_index)//3
-    labeled_scene_index_shuf = labeled_scene_index
-    random.shuffle(labeled_scene_index_shuf)
-
-    train_labeled_scene_index = labeled_scene_index_shuf[:-breakpt]
-    val_labeled_scene_index = labeled_scene_index_shuf[-breakpt: ]
-    return train_labeled_scene_index, val_labeled_scene_index
-
-
-
-# random.seed(0)
-# np.random.seed(0)
-# torch.manual_seed(0);
-# image_folder = '../data'
-# annotation_csv = '../data/annotation.csv'
-
-# unlabeled_scene_index = np.arange(106)
-# # The scenes from 106 - 133 are labeled
-# # You should devide the labeled_scene_index into two subsets (training and validation)
-# labeled_scene_index = np.arange(106, 134)
-# train_labeled_scene_index, val_labeled_scene_index  = gen_train_val_index(labeled_scene_index)
-
-
-# normalize = torchvision.transforms.Normalize(mean=[0.6394939, 0.6755114, 0.7049375],
-#                                      std=[0.31936955, 0.3117349 , 0.2953726 ])
-
-# transform = torchvision.transforms.Compose([torchvision.transforms.ToTensor(),
-#                                            normalize
-#                                            ])
-
-
-# kwargs = {
-#     #'first_dim': 'sample',
-#     'transform': transform,
-#     'image_folder': image_folder,
-#     'annotation_file': annotation_csv,
-#     'extra_info': True}
-
-# #dataset_train = LabeledDataset_RCNN (scene_index=train_labeled_scene_index, **kwargs)
-# #dataset_val = LabeledDataset_RCNN (scene_index=val_labeled_scene_index, **kwargs)
-
-# dataset_train = LabeledDataset(scene_index=train_labeled_scene_index, **kwargs)
-# dataset_val = LabeledDataset(scene_index=val_labeled_scene_index, **kwargs)
-
-
-
-
-
-# train_data_loader = torch.utils.data.DataLoader(
-#     dataset_train, batch_size=30, shuffle=False, num_workers=4,
-#     collate_fn=collate_fn)
-
-# val_data_loader = torch.utils.data.DataLoader(
-#     dataset_val, batch_size=30, shuffle=False, num_workers=4,
-#     collate_fn=collate_fn)
-
-
-
-
-#BEN CHANGED
-# plot_image(sample[0].reshape(1,3,256,-1))
 def sew_images(samples):
     new_samples = []
     for sample in samples:

@@ -25,9 +25,7 @@ import torchvision.transforms as transforms
 import torchvision.models as models
 
 from data_helper import UnlabeledDataset, LabeledDataset
-#from data_helper_triangle_down import TriangleLabeledDataset,
-#from shape_splitter import get_mask_name
-#from data_helper_triangle_down import load_mask
+
 from helper import collate_fn, draw_box
 import argparse
 import datetime
